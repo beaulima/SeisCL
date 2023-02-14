@@ -429,7 +429,7 @@ class SeisCL:
             self.gradout = 1
         else:
             self.gradout = 0
-        self.N = np.array(params[self.params[0]].shape, dtype=np.int)
+        self.N = np.array(params[self.params[0]].shape, dtype=np.int32)
         self.write_csts(workdir)
         self.write_model(params, workdir)
 
@@ -1050,6 +1050,10 @@ class SeisCL:
                             fontsize=12, ha='center', va='center', rotation=90,
                             path_effects=[withStroke(linewidth=3,
                                                      foreground="w")])
+
+    def test_analytics(self, test: str = "all", N: int = 300, plot: bool = False):
+        from .tests.test_analytics import run_test
+        run_test(test=test, N=N, plot=plot)
 
 
 if __name__ == "__main__":
